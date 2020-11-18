@@ -1,13 +1,13 @@
 /* eslint-disable no-use-before-define */
 import React from 'react'
 
-import Header from './components/Header'
+import Routes from './routes'
 import GlobalStyles from './styles/global'
 
 function App(): JSX.Element {
   return (
     <>
-      <Header />
+      <Routes />
 
       <GlobalStyles />
     </>
