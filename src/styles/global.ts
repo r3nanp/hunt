@@ -10,6 +10,10 @@ export default createGlobalStyle`
     font: 400 1rem Roboto;
     background: var(--bg);
   }
+  button, input {
+    outline: 0;
+    border: none;
+  }
   :root {
     --bg: #fafafa;
     --main: #333;
