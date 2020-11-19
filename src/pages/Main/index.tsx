@@ -1,28 +1,41 @@
 /* eslint-disable no-use-before-define */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import Header from '../../components/Header'
+import api from '../../services/api'
 
 import { Container, ProductList, Actions } from './styles'
 
+interface ProductProps {
+  _id: string
+  title: string
+  description: string
+}
+
 const Main: React.FC = () => {
+  const [data, setData] = useState<ProductProps[]>([])
+
+  useEffect(() => {
+    api.get('products')
+      .then(async response => {
+        const data = await response.data
+        setData(data.docs)
+      })
+  }, [])
+
   return (
     <>
       <Header />
       <Container>
         <ProductList>
-          <article>
-            <strong>React Native</strong>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel odit
-              recusandae repudiandae suscipit ex debitis officia voluptatum
-              dolorem, laudantium perspiciatis deserunt sit cum corrupti! Facere
-              vel ratione fugit harum dignissimos!
-            </p>
-
-            <Link to="/product">Acessar</Link>
-          </article>
+          {data.map(product => (
+            <article key={product._id}>
+              <strong>{product.title}</strong>
+              <p>{product.description}</p>
+              <Link to={`/product/${product._id}`}>Acessar</Link>
+            </article>
+          ))}
         </ProductList>
 
         <Actions>
