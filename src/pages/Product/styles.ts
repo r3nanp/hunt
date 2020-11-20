@@ -13,17 +13,18 @@ export const ProductInfo = styled.div`
   > h1 {
     font-size: 34px;
     font-weight: 700;
+    background: white;
   }
 
   > p {
     color: #666;
     line-height: 24px;
     margin-top: 5px;
+    background: white;
 
     > a {
       color: #069;
+      background: white;
     }
   }
-
-
 `

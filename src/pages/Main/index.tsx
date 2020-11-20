@@ -1,10 +1,12 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable no-use-before-define */
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import api from '../../services/api'
 
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import api from '../../services/api'
+import ProductItem from '../../components/ProductItem'
 
 import { Container, ProductList, Actions } from './styles'
 
@@ -16,12 +18,20 @@ interface ProductProps {
 
 const Main: React.FC = () => {
   const [data, setData] = useState<ProductProps[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     api.get('products').then(async response => {
       const data = await response.data
-      setData(data.docs)
+      const res = await data.docs
+      setData(res)
     })
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1500)
   }, [])
 
   return (
@@ -30,11 +40,11 @@ const Main: React.FC = () => {
       <Container>
         <ProductList>
           {data.map(product => (
-            <article key={product._id}>
+            <ProductItem isLoading={isLoading} key={product._id}>
               <strong>{product.title}</strong>
               <p>{product.description}</p>
               <Link to={`/product/${product._id}`}>Acessar</Link>
-            </article>
+            </ProductItem>
           ))}
         </ProductList>
 

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import Header from '../../components/Header'
 import api from '../../services/api'
 
+import LoadingProduct from '../../components/Shimmer/LoadingProduct'
 import { Container, ProductInfo } from './styles'
 
 interface ProductInfo {
@@ -29,7 +30,7 @@ const Product: React.FC = () => {
   }, [params.id])
 
   if (!data) {
-    return <p>Loading...</p>
+    return <LoadingProduct />
   }
 
   return (
@@ -39,7 +40,10 @@ const Product: React.FC = () => {
         <h1>{data.title}</h1>
         <p>{data.description}</p>
         <p>
-          URL: <a href={`${data.url}`}>{data.title}</a>
+          URL:{' '}
+          <a href={`${data.url}`} target="_blank" rel="noopener noreferrer">
+            {data.title}
+          </a>
         </p>
       </ProductInfo>
     </Container>
