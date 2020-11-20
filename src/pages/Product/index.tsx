@@ -1,19 +1,45 @@
 /* eslint-disable no-use-before-define */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 import Header from '../../components/Header'
+import api from '../../services/api'
 
 import { Container, ProductInfo } from './styles'
 
+interface ProductInfo {
+  title: string
+  description: string
+  url: string
+}
+
+interface RouteParams {
+  id: string
+}
+
 const Product: React.FC = () => {
+  const params = useParams<RouteParams>()
+  const [data, setData] = useState<ProductInfo>()
+
+  useEffect(() => {
+    api.get(`product/${params.id}`).then(async response => {
+      const data = await response.data
+      setData(data)
+    })
+  }, [params.id])
+
+  if (!data) {
+    return <p>Loading...</p>
+  }
+
   return (
     <Container>
       <Header />
       <ProductInfo>
-        <h1>title</h1>
-        <p>description</p>
+        <h1>{data.title}</h1>
+        <p>{data.description}</p>
         <p>
-          URL: <a href="#">SomeWhere</a>
+          URL: <a href={`${data.url}`}>{data.title}</a>
         </p>
       </ProductInfo>
     </Container>
