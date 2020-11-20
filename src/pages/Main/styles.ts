@@ -12,6 +12,8 @@ export const ProductList = styled.div`
   margin: 20px auto 0;
   padding: 0 20px;
 
+  height: 80vh;
+
   > article {
     background: white;
     border: 1px solid #ddd;

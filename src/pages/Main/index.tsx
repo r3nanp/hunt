@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import api from '../../services/api'
 
@@ -17,11 +18,10 @@ const Main: React.FC = () => {
   const [data, setData] = useState<ProductProps[]>([])
 
   useEffect(() => {
-    api.get('products')
-      .then(async response => {
-        const data = await response.data
-        setData(data.docs)
-      })
+    api.get('products').then(async response => {
+      const data = await response.data
+      setData(data.docs)
+    })
   }, [])
 
   return (
@@ -43,6 +43,7 @@ const Main: React.FC = () => {
           <button>Próximo</button>
         </Actions>
       </Container>
+      <Footer />
     </>
   )
 }
