@@ -18,5 +18,7 @@ export default createGlobalStyle`
     --bg: #fafafa;
     --main: #333;
     --primary: #da552f;
+    --link-color: #15c3d6;
+    --link-color-hover: #17d6db;
   }
 `
