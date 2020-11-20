@@ -18,6 +18,17 @@
 
 ---
 
+## Techologies used 🛠
+- React
+- Typescript
+- Unform
+- axios
+- Yup
+- react-router-dom
+- styled-components
+- react-icons
+- eslint
+- prettier
 ## How to run and contribute 🤔
 
 ```
@@ -67,8 +78,7 @@ $ yarn start or npm run start
 $ yarn build or npm run build
 ```
 
+---
 #### Screenshot
 
-<img src="./.github/hunt.png" width="400" height="250" >
-
----
+<img src="./.github/hunt.png">
